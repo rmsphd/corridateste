@@ -3,17 +3,17 @@ package printer
 import (
 	"fmt"
 	"interview-test/model"
-	"os"
+	"io"
 	"text/tabwriter"
 )
 
 // PrintChampions imprime o resultado na tela
-func PrintChampions(results []model.Result, output *os.File) {
+func PrintChampions(results []model.Result, output io.Writer) {
 	w := tabwriter.NewWriter(output, 1, 2, 2, ' ', tabwriter.AlignRight|tabwriter.Debug)
 	fmt.Fprintln(w, "Posição Chegada\tCódigo Piloto\tNome Piloto\tQtde Voltas Completadas\tTempo Total de Prova")
 
 	for _, r := range results {
-		fmt.Fprintf(w, "%v\t%s\t%s\t%v\t%v\n", r.Position, r.RunnerID, r.RunnerName, r.Laps, r.RunnerTime)
+		fmt.Fprintf(w, "%v\t%s\t%s\t%v\t%s\n", r.Position, r.RunnerID, r.RunnerName, r.Laps, r.RunnerTime.Format("4:05.000"))
 	}
 	w.Flush()
 }

@@ -12,9 +12,7 @@ import (
 func main() {
 	args := os.Args
 	if len(args) <= 1 {
-		fmt.Printf(`Error: Need to use with argument file name
-Example: %v corrida.log [saida.txt]
-`, args[0])
+		fmt.Printf("Error: Need to use with argument file name\nExample: %v corrida.log [saida.txt]", args[0])
 		return
 	}
 

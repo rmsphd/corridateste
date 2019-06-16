@@ -3,12 +3,12 @@ package file
 import (
 	"bufio"
 	"fmt"
-	"os"
+	"io"
 	"regexp"
 )
 
 // Reader Le o arquivo separado por espaços
-func Reader(file *os.File) ([][]string, error) {
+func Reader(file io.Reader) ([][]string, error) {
 	re := regexp.MustCompile("[\\s–]+")
 
 	scanner := bufio.NewScanner(file)
