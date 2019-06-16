@@ -8,8 +8,8 @@ import (
 )
 
 // PrintChampions imprime o resultado na tela
-func PrintChampions(results []model.Result) {
-	w := tabwriter.NewWriter(os.Stdout, 1, 2, 2, ' ', tabwriter.AlignRight|tabwriter.Debug)
+func PrintChampions(results []model.Result, output *os.File) {
+	w := tabwriter.NewWriter(output, 1, 2, 2, ' ', tabwriter.AlignRight|tabwriter.Debug)
 	fmt.Fprintln(w, "Posição Chegada\tCódigo Piloto\tNome Piloto\tQtde Voltas Completadas\tTempo Total de Prova")
 
 	for _, r := range results {
