@@ -63,8 +63,41 @@ SOLUÇÃO
 * Crie testes;
 * Não é necessário utilizar nenhum framework, procure utilizar os recursos da linguagem;
 
+Pré-requisitos
+==============
 
-ENTREGA
-=======
-* **Não** faça um fork desse projeto. Crie um repositório no seu perfil do GitHub e nos envie a url;
-* Crie um arquivo SUAS-INSTRUÇÕES.txt para adicionar algum comentário/observação que achar importante;
+- Instalar 
+  - Docker https://docs.docker.com/install/
+- Configurar para linux
+  - https://docs.docker.com/install/linux/linux-postinstall/
+
+## Alternativa
+- Instalar Go lang 1.12.x
+  - https://golang.org/dl/
+
+BUILD da solução
+======
+
+* Dentro da pasta do projeto
+    * Com docker
+        * docker run --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp golang:alpine ./build.sh
+    * Com Golang 1.12.x
+        * ./build.sh
+    * Com Golang 1.12.x alternativo
+        * go build -o interview
+
+
+EXECUÇÃO
+========
+
+* Escolha o binário que se encaixa com o seu ambiente,
+    * ./interview-\<OS>-\<ARCH>
+    * Exemplo: ./interview-darwin-amd64 
+* Execute na linha de comando apontando para um arquivo válido
+    * ./interview-\<OS>-\<ARCH> <arquivoEntrada.log> [arquivoSaiida.log]
+        * <arquivoEntrada.log> obrigatório, é o arquivo que contem os dados de cada volta da corrida
+        * [arquivoSaiida.log] opcional, se não informado será retornado na tela, mostra os resultado da corrida
+    * Exemplos
+        * ./interview-darwin-amd64 corrida.log
+        * ./interview-darwin-amd64 corrida.log resultado.log
+

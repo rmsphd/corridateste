@@ -5,6 +5,7 @@ import (
 	"interview-test/builder"
 	"interview-test/file"
 	"interview-test/mapper"
+	"interview-test/model"
 	"interview-test/printer"
 	"os"
 )
@@ -12,7 +13,7 @@ import (
 func main() {
 	args := os.Args
 	if len(args) <= 1 {
-		fmt.Printf("Error: Need to use with argument file name\nExample: %v corrida.log [saida.txt]", args[0])
+		fmt.Printf("Error: Need to use with argument file name\nExample: %v corrida.log [saida.txt]\n", args[0])
 		return
 	}
 
@@ -35,18 +36,34 @@ func main() {
 		return
 	}
 
-	results := builder.CalculateChampions(laps)
-
-	fOutput := os.Stdout
+	w := os.Stdout
 	if len(args) > 2 {
-		fOutput, err = os.OpenFile(args[2], os.O_RDWR|os.O_CREATE, 0666)
+		w, err = os.OpenFile(args[2], os.O_RDWR|os.O_CREATE, 0666)
 		if err != nil {
 			fmt.Printf("Error: %v\n", err)
 			return
 		}
-		defer fOutput.Close()
+		defer w.Close()
 	}
 
-	printer.PrintChampions(results, fOutput)
+	fmt.Fprintf(w, "\nResultado da Corrida\n")
+	results := builder.CalculateChampions(laps)
+	printer.PrintChampions(results, w)
+
+	fmt.Fprintf(w, "\nMelhor volta de cada piloto\n")
+	betterLaps := builder.BetterLapForEachRunner(laps)
+	printer.PrintLaps(betterLaps, w)
+
+	fmt.Fprintf(w, "\nMelhor volta da corrida\n")
+	betterLap := builder.BetterLap(laps)
+	printer.PrintLaps([]model.Lap{betterLap}, w)
+
+	fmt.Fprintf(w, "\nVelocidade média de cada piloto durante toda corrida\n")
+	speeds := builder.AverageSpeed(laps)
+	printer.PrintSpeeds(speeds, w)
+
+	fmt.Fprintf(w, "\nQuanto tempo cada piloto chegou após o vencedor\n")
+	runners := builder.TimeRunners(laps)
+	printer.PrintRunners(runners, w)
 
 }

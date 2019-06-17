@@ -1,14 +1,34 @@
 package builder
 
 import (
+	"fmt"
 	"interview-test/model"
 	"reflect"
 	"testing"
 	"time"
 )
 
-func TestCalculateChampions(t *testing.T) {
+func ExampleCalculateChampions() {
+	h, _ := time.Parse("15:04:05.000", "08:12:01.123")
+	lt, _ := time.Parse("4:05.000", "1:23.123")
 
+	laps := []model.Lap{
+		{
+			Hour:       h,
+			RunnerID:   "001",
+			RunnerName: "test name",
+			LapID:      2,
+			LapTime:    lt,
+			Speed:      40.123,
+		},
+	}
+
+	fmt.Printf("%v", CalculateChampions(laps))
+
+	// Output: [{1 001 test name 2 0000-01-01 00:01:23.123 +0000 UTC}]
+}
+
+func TestCalculateChampions(t *testing.T) {
 	h, _ := time.Parse("15:04:05.000", "08:12:01.123")
 	lt, _ := time.Parse("4:05.000", "1:23.123")
 	ltr, _ := time.Parse("4:05.000", "2:46.246")

@@ -1,11 +1,23 @@
 package mapper
 
 import (
+	"fmt"
 	"interview-test/model"
 	"reflect"
 	"testing"
 	"time"
 )
+
+func ExampleNewLaps() {
+	args := [][]string{
+		[]string{"08:12:01.123", "001", "test name", "3", "1:23.123", "40,123"},
+	}
+
+	got, _ := NewLaps(args)
+	fmt.Printf("%v", got)
+
+	// Output: [{0000-01-01 08:12:01.123 +0000 UTC 001 test name 3 0000-01-01 00:01:23.123 +0000 UTC 40.123}]
+}
 
 func TestNewLaps(t *testing.T) {
 	args := [][]string{

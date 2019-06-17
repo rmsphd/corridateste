@@ -2,10 +2,20 @@ package file
 
 import (
 	"errors"
+	"fmt"
 	"reflect"
 	"strings"
 	"testing"
 )
+
+func ExampleReader() {
+	file := strings.NewReader("This is a test header\nThis is a test string")
+
+	got, _ := Reader(file)
+	fmt.Printf("%v", got)
+
+	// Output: [[This is a test string]]
+}
 
 func TestReader(t *testing.T) {
 	file := strings.NewReader("This is a test header\nThis is a test string")

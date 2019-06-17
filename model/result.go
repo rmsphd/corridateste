@@ -9,4 +9,5 @@ type Result struct {
 	RunnerName string
 	Laps       uint
 	RunnerTime time.Time
+	Speed      float32
 }
