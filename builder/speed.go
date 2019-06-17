@@ -2,25 +2,13 @@ package builder
 
 import (
 	"interview-test/model"
-	"time"
 )
 
 // AverageSpeed Velocidade média de cada piloto durante toda corrida
 func AverageSpeed(laps []model.Lap) []model.Result {
-	results := make([]model.Result, 0)
+	results := CalculateChampions(laps)
 
-	for _, lap := range laps {
-		i, r, exist := getResult(results, lap.RunnerID)
-
-		if exist {
-			results[i] = updateSpeedResult(lap, r)
-		} else {
-			results = append(results, newResult(lap))
-		}
-
-	}
-
-	rankResults(results)
+	sumSpeedResult(laps, results)
 	calculateAverage(results)
 
 	return results
@@ -35,15 +23,13 @@ func calculateAverage(results []model.Result) {
 }
 
 // updateSpeedResult Atualiza os dados de um corredor com velocidade
-func updateSpeedResult(lap model.Lap, r model.Result) model.Result {
-	moreTime := (time.Duration(lap.LapTime.Minute()) * time.Minute) +
-		(time.Duration(lap.LapTime.Second()) * time.Second) +
-		(time.Duration(lap.LapTime.Nanosecond()) * time.Nanosecond)
-
-	if lap.LapID > r.Laps {
-		r.Laps = lap.LapID
+func sumSpeedResult(laps []model.Lap, results []model.Result) {
+	for i, result := range results {
+		for _, lap := range laps {
+			if lap.RunnerID == result.RunnerID {
+				result.Speed += lap.Speed
+			}
+		}
+		results[i] = result
 	}
-	r.RunnerTime = r.RunnerTime.Add(moreTime)
-	r.Speed = r.Speed + lap.Speed
-	return r
 }

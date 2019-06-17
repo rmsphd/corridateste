@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-func ExamplePrintChampions() {
+func ExamplePrintSpeeds() {
 	th, _ := time.Parse("4:05.000", "1:23.123")
 	r := []model.Result{
 		{
@@ -17,16 +17,17 @@ func ExamplePrintChampions() {
 			RunnerName: "test",
 			Laps:       1,
 			RunnerTime: th,
+			Speed:      40.123,
 		},
 	}
 
-	PrintChampions(r, os.Stdout)
+	PrintSpeeds(r, os.Stdout)
 
-	// Output: Posição Chegada|  Código Piloto|  Nome Piloto|  Qtde Voltas Completadas|Tempo Total de Prova
-	//                 1|              1|         test|                        1|1:23.123
+	// Output: Posição Chegada|  Código Piloto|  Nome Piloto|  Qtde Voltas Completadas|  Tempo Total de Prova|Velocidade média
+	//                 1|              1|         test|                        1|              1:23.123|40.123
 }
 
-func TestPrintChampions(t *testing.T) {
+func TestPrintSpeeds(t *testing.T) {
 	th, _ := time.Parse("4:05.000", "1:23.123")
 	r := []model.Result{
 		{
@@ -35,15 +36,16 @@ func TestPrintChampions(t *testing.T) {
 			RunnerName: "test",
 			Laps:       1,
 			RunnerTime: th,
+			Speed:      40.123,
 		},
 	}
 	var w bytes.Buffer
-	PrintChampions(r, &w)
+	PrintSpeeds(r, &w)
 	got := w.String()
 	want := ``
 
 	if got == want {
-		t.Errorf("PrintChampions() = \n%s\n, want \n%s", got, want)
+		t.Errorf("PrintSpeeds() = \n%s\n, want \n%s", got, want)
 	}
 
 }

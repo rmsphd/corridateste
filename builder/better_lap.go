@@ -2,6 +2,7 @@ package builder
 
 import (
 	"interview-test/model"
+	"sort"
 )
 
 // BetterLapForEachRunner melhor volta de cada piloto
@@ -23,15 +24,14 @@ func BetterLapForEachRunner(laps []model.Lap) []model.Lap {
 
 // BetterLap melhor volta da corrida
 func BetterLap(laps []model.Lap) model.Lap {
-	result := model.Lap{}
+	if len(laps) > 0 {
+		sort.SliceStable(laps, func(a int, b int) bool {
+			return laps[a].LapTime.Before(laps[b].LapTime)
+		})
 
-	for _, lap := range laps {
-		if lap.LapTime.Before(result.LapTime) {
-			result = lap
-		}
+		return laps[0]
 	}
-
-	return result
+	return model.Lap{}
 }
 
 // getLap recupera um volta para um corredor

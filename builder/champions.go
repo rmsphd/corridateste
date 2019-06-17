@@ -32,7 +32,6 @@ func newResult(lap model.Lap) model.Result {
 		RunnerName: lap.RunnerName,
 		Laps:       lap.LapID,
 		RunnerTime: lap.LapTime,
-		Speed:      lap.Speed,
 	}
 }
 
