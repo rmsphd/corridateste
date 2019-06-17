@@ -1,5 +1,7 @@
-PROBLEMA
+RESULTADO DA CORRIDA
 ========
+[![Go Report Card](https://goreportcard.com/badge/github.com/rmsphd/corridateste)](https://goreportcard.com/report/github.com/rmsphd/corridateste)
+
 Dado o seguinte log de uma corrida de Kart:
 
 [corrida.log](corrida.log)

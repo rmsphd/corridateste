@@ -7,6 +7,7 @@ import (
 	"text/tabwriter"
 )
 
+// PrintLaps imprime o resultado das voltas
 func PrintLaps(laps []model.Lap, output io.Writer) {
 	w := tabwriter.NewWriter(output, 1, 2, 2, ' ', tabwriter.AlignRight|tabwriter.Debug)
 	fmt.Fprintln(w, "Código Piloto\tNome Piloto\tNúmero Volta\tTempo da Volta\tVelocidade média")
