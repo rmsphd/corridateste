@@ -1,0 +1,22 @@
+version: 2
+mergeable:
+  - when: pull_request.*, pull_request_review.*
+    name: 'Approval check Los Maldivos'
+    validate:
+      - do: approvals
+        min:
+          count: 1
+        block:
+          changes_requested: true
+        limit:
+          users: ['rmsphd']
+  - when: pull_request.*, pull_request_review.*
+    name: 'Approval check Frota'
+    validate:
+      - do: approvals
+        min:
+          count: 1
+        block:
+          changes_requested: true
+        limit:
+          users: ['davidfoliveira']
