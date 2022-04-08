@@ -85,3 +85,6 @@ EXECUÇÃO
         * ./interview-darwin-amd64 corrida.log
         * ./interview-darwin-amd64 corrida.log resultado.log
 
+
+
+test
