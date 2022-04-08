@@ -18,4 +18,4 @@ mergeable:
             block:
               changes_requested: true
             limit:
-              users: ['davidfoliveira']
+              users: ['rmsphd2']
