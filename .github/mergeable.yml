@@ -9,7 +9,7 @@ mergeable:
         block:
           changes_requested: true
         limit:
-          users: ['rmsphd']
+          users: ['rsiennapt']
   - when: pull_request.*, pull_request_review.*
     name: 'Approval check Frota'
     validate:
